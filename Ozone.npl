@@ -1,0 +1,201 @@
+JDF F
+// Created by Project Navigator ver 1.0
+PROJECT Ozone
+DESIGN ozone Normal
+DEVFAM virtexe
+DEVFAMTIME 1068335148
+DEVICE xcv2000e
+DEVICETIME 1068335148
+DEVPKG fg680
+DEVPKGTIME 1068335148
+DEVSPEED -6
+DEVSPEEDTIME 0
+FLOW XST Verilog
+FLOWTIME 1068335148
+STIMULUS dispatch_tb.tf Normal
+STIMULUS reg_status_tb.tf Normal
+STIMULUS cpu_memory_tb.tf Normal
+STIMULUS mult_res_stations_tb_III.tf Normal
+STIMULUS commit_tb.tf Normal
+STIMULUS cache_tb.tf Normal
+STIMULUS MultDivid_adder_tb.tf Normal
+STIMULUS multdivid_datapath_tb.tf Normal
+STIMULUS mult_res_stations_tb.tf Normal
+STIMULUS dmdb_dispatch_tb.tf Normal
+STIMULUS MultDivid_result_tb.tf Normal
+STIMULUS store_buffer_tb.tf Normal
+STIMULUS alu_res_stations_tb.tf Normal
+STIMULUS processor_tb.tf Normal
+STIMULUS cdb_tb.tf Normal
+STIMULUS mult_res_stations_tb_II.tf Normal
+STIMULUS MultDivid_controller_tb.tf Normal
+STIMULUS branchPredictor_tb.tf Normal
+STIMULUS dmdb_commit_tb.tf Normal
+STIMULUS rob_tb.tf Normal
+STIMULUS load_buffer_tb.tf Normal
+MODULE register.v
+MODSTYLE register Normal
+MODULE dmdb.v
+MODSTYLE dmdb Normal
+MODULE upedge_detector.v
+MODSTYLE upedge_detector Normal
+MODULE iReg.v
+MODSTYLE iReg Normal
+MODULE branch_res_station.v
+MODSTYLE branch_res_station Normal
+MODULE ram13x128.v
+MODSTYLE ram13x128 Normal
+MODULE CDBArbiter.v
+MODSTYLE CDBArbiter Normal
+MODULE rom_test.v
+MODSTYLE rom_test Normal
+MODULE four.v
+MODSTYLE four Normal
+MODULE dmdb_commit.v
+MODSTYLE dmdb_commit Normal
+MODULE sramblock2048.v
+MODSTYLE ramblock2048 Normal
+MODSTYLE datasource Normal
+MODSTYLE BLKMEMSP_V4_0 Normal
+MODULE load_buffer.v
+MODSTYLE load_buffer Normal
+MODULE data_source.v
+MODSTYLE data_source Normal
+MODULE rom_test_branch.v
+MODSTYLE rom_test_branch Normal
+MODULE mt48lc8m16a2.v
+MODSTYLE mt48lc8m16a2 Normal
+MODULE readBuffer.v
+MODSTYLE readBuffer Normal
+MODULE MultDivid_divisor_multiplier_posTwo.v
+MODSTYLE MultDivid_divisor_multiplier_posTwo Normal
+MODULE processor.sch
+MODSTYLE processor Normal
+MODULE MultDivid_divisor_multiplier.v
+MODSTYLE MultDivid_divisor_multiplier Normal
+MODULE branch_add.v
+MODSTYLE branch_add Normal
+MODULE regFile.v
+MODSTYLE regfile Normal
+MODULE arbiter.v
+MODSTYLE arbiter Normal
+MODULE cdb.v
+MODSTYLE cdb Normal
+MODULE branchunit.v
+MODSTYLE branchUnit Normal
+MODULE counter.v
+MODSTYLE updown_counter Normal
+MODSTYLE counter Normal
+MODULE rom_test_break.v
+MODSTYLE rom_test_break Normal
+MODULE m32x2.v
+MODSTYLE m32x2 Normal
+MODULE shifter.v
+MODSTYLE shifter Normal
+MODULE MultDivid_controller.v
+MODSTYLE MultDivid_controller Normal
+MODULE m34x3.v
+MODSTYLE m34x3 Normal
+MODULE rob.v
+MODSTYLE rob Normal
+MODULE alu.v
+MODSTYLE alu Normal
+MODULE m32x3.v
+MODSTYLE m32x3 Normal
+MODULE m32x4.v
+MODSTYLE m32x4 Normal
+MODULE memory_control.v
+MODSTYLE memory_control Normal
+MODULE delay_proc_rst.v
+MODSTYLE delay_proc_rst Normal
+MODULE check_position.v
+MODSTYLE check_position Normal
+MODULE rom_test_mem2.v
+MODSTYLE rom_test_mem2 Normal
+MODULE start_addr.v
+MODSTYLE start_addr Normal
+MODULE MultDivid_datapath.sch
+MODSTYLE multdivid_datapath Normal
+MODULE rom.v
+MODSTYLE rom Normal
+MODULE reg_HI_LO.v
+MODSTYLE reg_HI_LO Normal
+MODULE Zeroes.v
+MODSTYLE Zeroes Normal
+MODULE reg_status.v
+MODSTYLE reg_status Normal
+MODULE BLKMEMDP_V5_0.v
+MODSTYLE BLKMEMDP_V5_0 Normal
+MODULE commit.v
+MODSTYLE commit Normal
+MODULE mult_res_stations.v
+MODSTYLE mult_res_stations Normal
+MODULE BLKMEMSP_V5_0.v
+MODSTYLE BLKMEMSP_V5_0 Normal
+MODULE dmdb_dispatch.v
+MODSTYLE dmdb_dispatch Normal
+MODULE extend.v
+MODSTYLE extend Normal
+MODULE MultDivid_result.v
+MODSTYLE MultDivid_result Normal
+MODULE counter64.v
+MODSTYLE counter64 Normal
+MODULE bts32.v
+MODSTYLE bts32 Normal
+MODULE rom_test2.v
+MODSTYLE rom_test2 Normal
+MODULE rom_test3.v
+MODSTYLE rom_test3 Normal
+MODULE reg32.v
+MODSTYLE reg32 Normal
+MODULE pc.v
+MODSTYLE pc Normal
+MODULE stall_monitor.v
+MODSTYLE stall_monitor Normal
+MODULE cache.v
+MODSTYLE cache Normal
+MODULE ram32x1024.v
+MODSTYLE ram32x1024 Normal
+MODULE MultDivid_adder.v
+MODSTYLE MultDivid_adder Normal
+MODULE slt_block.v
+MODSTYLE slt_block Normal
+MODULE adder.v
+MODSTYLE adder Normal
+MODULE store_buffer.v
+MODSTYLE store_buffer Normal
+MODULE alu_res_stations.v
+MODSTYLE alu_res_stations Normal
+MODULE ram21x2.v
+MODSTYLE ram21x2 Normal
+MODULE ram256x2.v
+MODSTYLE ram256x2 Normal
+MODULE memio.v
+MODSTYLE memio Normal
+MODULE branchPredictor.v
+MODSTYLE branchPredictor Normal
+MODULE dummy.v
+MODSTYLE dummy Normal
+MODULE pcSelect.v
+MODSTYLE pcSelect Normal
+MODULE cpu_memory.sch
+MODSTYLE cpu_memory Normal
+MODULE rom_test_mem.v
+MODSTYLE rom_test_mem Normal
+MODULE dispatch.v
+MODSTYLE dispatch Normal
+MODULE zero256.v
+MODSTYLE zero256 Normal
+MODULE alu_ex.sch
+MODSTYLE alu_ex Normal
+MODULE tagsfile.v
+MODSTYLE tagsfile Normal
+MODULE MultDivid_splitter.v
+MODSTYLE MultDivid_splitter Normal
+MODULE check_all_positions.v
+MODSTYLE check_all_positions Normal
+[STATUS-ALL]
+processor.vfModel=WARNINGS,1070325972
+rom_test_mem2.v.jhdFile=WARNINGS,1070325972
+[STRATEGY-LIST]
+Normal=True

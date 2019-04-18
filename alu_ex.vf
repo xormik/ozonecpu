@@ -1,0 +1,28 @@
+// Verilog model created from schematic alu_ex.sch - Sat Nov 29 03:25:15 2003
+
+
+`timescale 1ns / 1ps
+
+module alu_ex(alu_ctrl, din1, din2, dout);
+
+ input [5:0] alu_ctrl;
+ input [31:0] din1;
+ input [31:0] din2;
+output [31:0] dout;
+
+wire XLXN_5;
+wire XLXN_6;
+wire [31:0] XLXN_7;
+wire [31:0] XLXN_8;
+wire [31:0] XLXN_9;
+
+alu XLXI_2 (.A(din1[31:0]), .B(din2[31:0]), .FSEL(alu_ctrl[2:0]), .NEG(XLXN_5),
+      .OVF(XLXN_6), .DOUT(XLXN_7[31:0]));
+m32x3 XLXI_6 (.in0(XLXN_7[31:0]), .in1(XLXN_8[31:0]), .in2(XLXN_9[31:0]),
+      .sel(alu_ctrl[5:4]), .out0(dout[31:0]));
+shifter XLXI_3 (.shiftType(alu_ctrl[1:0]), .shiftAmt(din1[4:0]),
+      .in0(din2[31:0]), .out0(XLXN_9[31:0]));
+slt_block XLXI_4 (.NEG(XLXN_5), .OVF(XLXN_6), .SltType(alu_ctrl[3]),
+      .signInput1(din1[31]), .signInput2(din2[31]), .result(XLXN_8[31:0]));
+endmodule
+

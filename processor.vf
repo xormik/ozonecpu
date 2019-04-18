@@ -1,0 +1,467 @@
+// Verilog model created from schematic processor.sch - Thu Dec 04 01:12:03 2003
+
+
+`timescale 1ns / 1ps
+
+module processor(CLK, DRAMCLK, RST, mem_ctrl_rst, memio_in, memio_outsel, rls,
+      Ba, CAS, CKE, CS, DQM, RAS, WE, addr, dm_addr, dm_instr, memio_out,
+      stat_output, mem_BiData);
+
+ input CLK;
+ input DRAMCLK;
+ input RST;
+ input mem_ctrl_rst;
+ input [7:0] memio_in;
+ input memio_outsel;
+ input rls;
+output [1:0] Ba;
+output CAS;
+output CKE;
+output CS;
+output [1:0] DQM;
+output RAS;
+output WE;
+output [11:0] addr;
+output [31:0] dm_addr;
+output [31:0] dm_instr;
+output [31:0] memio_out;
+output [7:0] stat_output;
+ inout [31:0] mem_BiData;
+
+wire [31:0] BU_targetAddr;
+wire [31:0] Corona;
+wire GND;
+wire IF_enable;
+wire VCC;
+wire [31:0] XLXN_1127;
+wire [31:0] XLXN_1128;
+wire [31:0] XLXN_1129;
+wire [31:0] XLXN_1130;
+wire [31:0] XLXN_13;
+wire [31:0] XLXN_1375;
+wire [31:0] XLXN_1388;
+wire XLXN_1419;
+wire XLXN_1594;
+wire XLXN_161;
+wire XLXN_1679;
+wire XLXN_1710;
+wire [68:0] XLXN_1720;
+wire XLXN_1727;
+wire [68:0] XLXN_1729;
+wire [31:0] XLXN_1925;
+wire [31:0] XLXN_1926;
+wire XLXN_1931;
+wire XLXN_1944;
+wire [132:0] XLXN_1945;
+wire XLXN_1946;
+wire XLXN_1947;
+wire XLXN_1948;
+wire XLXN_1949;
+wire XLXN_1950;
+wire [31:0] XLXN_1951;
+wire [31:0] XLXN_1952;
+wire [31:0] XLXN_1953;
+wire [31:0] XLXN_1954;
+wire XLXN_1956;
+wire [31:0] XLXN_1991;
+wire [31:0] XLXN_2014;
+wire XLXN_2027;
+wire XLXN_2028;
+wire [31:0] XLXN_2034;
+wire [31:0] XLXN_239;
+wire [31:0] XLXN_34;
+wire [31:0] XLXN_35;
+wire [5:0] XLXN_36;
+wire [31:0] XLXN_37;
+wire [31:0] XLXN_633;
+wire XLXN_73;
+wire [100:0] XLXN_74;
+wire XLXN_75;
+wire XLXN_828;
+wire XLXN_830;
+wire [100:0] XLXN_876;
+wire [31:0] adder_pc4;
+wire [31:0] addrOUT;
+wire [31:0] addr_notTaken;
+wire [31:0] addr_taken;
+wire airplane;
+wire aluFull;
+wire arbiter_WB_granted;
+wire branchFull;
+wire burstReadDone;
+wire [255:0] cache_line;
+wire can_opener;
+wire [132:0] cdb_dout;
+wire cdb_dout_en;
+wire commit_memio_we;
+wire commit_robCommit;
+wire commit_rollBack;
+wire commit_stall_rollback;
+wire commit_write_cache;
+wire commit_write_mem_req;
+wire [63:0] cycle_count;
+wire [4:0] dReorder;
+wire [22:0] data_mem_addr;
+wire data_req;
+wire data_we_gate;
+wire [2:0] dispatch_MultDivOp;
+wire dispatch_ROBEntryReady;
+wire [15:0] dispatch_RSAddrImm;
+wire dispatch_RSBusy;
+wire [4:0] dispatch_RSQj;
+wire [4:0] dispatch_RSQk;
+wire [31:0] dispatch_RSVj;
+wire [31:0] dispatch_RSVk;
+wire dispatch_aluIssue;
+wire [5:0] dispatch_aluOp;
+wire dispatch_branchIssue;
+wire [1:0] dispatch_branchOp;
+wire dispatch_jrStall;
+wire dispatch_lwIssue;
+wire dispatch_multIssue;
+wire [4:0] dispatch_rd;
+wire dispatch_regStatIssue;
+wire dispatch_robIssue;
+wire [5:0] dispatch_rs;
+wire [4:0] dispatch_rsH;
+wire [4:0] dispatch_rt;
+wire [4:0] dispatch_rtH;
+wire dispatch_swIssue;
+wire [5:0] dispatch_writeReg;
+wire [4:0] dispatch_writeRegROBEntry;
+wire [22:0] inst_mem_addr;
+wire inst_req;
+wire inst_req_or;
+wire inst_req_reg;
+wire inst_we_gate;
+wire [31:0] instrOUT;
+wire [31:0] instr_addr;
+wire [28:0] load_buffer_loadAddrBus;
+wire [2:0] load_buffer_loadCurrPtr;
+wire [4:0] load_buffer_loadEntry1;
+wire [4:0] load_buffer_loadEntry2;
+wire [4:0] load_buffer_loadEntry3;
+wire [4:0] load_buffer_loadEntry4;
+wire [4:0] load_buffer_loadEntry5;
+wire [4:0] load_buffer_loadEntry6;
+wire [6:1] load_buffer_loadIsCC;
+wire lwFull;
+wire [22:0] mem_addr;
+wire [31:0] mem_data;
+wire mem_r_w;
+wire mem_request;
+wire [31:0] memio_dout;
+wire mult_full;
+wire [5:0] mult_kickout;
+wire [31:0] mux_nextPC;
+wire [31:0] orangina;
+wire [1:0] pcMuxSel;
+wire [31:0] pc_addrOUT;
+wire readBuffer_WE;
+wire regFileCommit;
+wire regStatCommit;
+wire [4:0] regStatus_rsReorder;
+wire [4:0] regStatus_rtReorder;
+wire [31:0] reg_HI_LO;
+wire [31:0] regfile_rsData;
+wire [31:0] regfile_rsData_pre;
+wire [31:0] regfile_rtData;
+wire rich;
+wire robFull;
+wire robReady;
+wire rob_PostBranchDelayEntryValid;
+wire [31:0] rob_addrOUT;
+wire [4:0] rob_commitPtr;
+wire [22:0] rob_destOUT;
+wire [4:0] rob_issuePtr;
+wire [31:0] rob_loadData;
+wire rob_loadDataValid;
+wire [6:1] rob_loadReadyToExe;
+wire rob_memio_bit;
+wire [31:0] rob_readPredAddr;
+wire [31:0] rob_readValueOUT1;
+wire [31:0] rob_readValueOUT2;
+wire [63:0] rob_valueOUT;
+wire [31:0] rob_valueOUT_reg;
+wire [31:0] rom_addr;
+wire rsHReady;
+wire rtHReady;
+wire [28:0] store_buffer_addr_out;
+wire store_buffer_req_bus;
+wire swFull;
+wire [31:0] targetAddr;
+wire waitForMem;
+wire [255:0] zeroes;
+
+adder XLXI_6 (.in0(XLXN_13[31:0]), .in1(pc_addrOUT[31:0]),
+      .sum(adder_pc4[31:0]));
+alu_ex my_alu_ex (.din1(XLXN_34[31:0]), .din2(XLXN_35[31:0]),
+      .alu_ctrl(XLXN_36[5:0]), .dout(XLXN_37[31:0]));
+alu_res_stations my_alu_rs (.issue(dispatch_aluIssue), .cdb_en(cdb_dout_en),
+      .bus_granted(XLXN_75), .clk(CLK), .rst(RST), .flush(commit_rollBack),
+      .Vj_in(dispatch_RSVj[31:0]), .Vk_in(dispatch_RSVk[31:0]),
+      .Qj_in(dispatch_RSQj[4:0]), .Qk_in(dispatch_RSQk[4:0]),
+      .alu_type_in(dispatch_aluOp[5:0]),
+      .issued_to_in(dispatch_writeRegROBEntry[4:0]), .cdb_in(cdb_dout[36:0]),
+      .alu_result(XLXN_37[31:0]), .full(aluFull), .req_bus(XLXN_73),
+      .alu_inA(XLXN_34[31:0]), .alu_inB(XLXN_35[31:0]),
+      .alu_type_out(XLXN_36[5:0]), .cdb_out(XLXN_74[100:0]),
+      .rob_commitPtr(rob_commitPtr[4:0]));
+AND2 XLXI_229 (.I0(inst_we_gate), .I1(burstReadDone), .O(XLXN_1679));
+AND2 XLXI_255 (.I0(burstReadDone), .I1(data_we_gate), .O(XLXN_1594));
+AND2B1 XLXI_232 (.I0(load_buffer_loadAddrBus[23]), .I1(XLXN_1710),
+      .O(data_req));
+AND2B1 XLXI_273 (.I0(rom_addr[31]), .I1(XLXN_1931), .O(inst_req));
+arbiter my_arbiter (.inst_req(inst_req), .data_req(data_req),
+      .WB_req(commit_write_mem_req), .WB_full(robFull),
+      .waitForMem(waitForMem), .CLK(CLK), .RESET(RST),
+      .inst_addr(inst_mem_addr[22:0]), .data_addr(data_mem_addr[22:0]),
+      .WB_addr(rob_destOUT[22:0]), .WB_data(rob_valueOUT[31:0]),
+      .request(mem_request), .r_w(mem_r_w), .WB_granted(arbiter_WB_granted),
+      .addr(mem_addr[22:0]), .dataOut(mem_data[31:0]), .CurState(),
+      .NextState(), .inst_we_gate(inst_we_gate), .data_we_gate(data_we_gate));
+branch_add my_branch_add (.immed(Corona[15:0]), .addr_in(pc_addrOUT[31:0]),
+      .addr_taken(addr_taken[31:0]), .addr_notTaken(addr_notTaken[31:0]));
+branch_res_station my_branch_res_station (.issue(dispatch_branchIssue),
+      .cdb_en(cdb_dout_en), .bus_granted(XLXN_830), .clk(CLK), .rst(RST),
+      .flush(commit_rollBack), .Vj_in(dispatch_RSVj[31:0]),
+      .Vk_in(dispatch_RSVk[31:0]), .Qj_in(dispatch_RSQj[4:0]),
+      .Qk_in(dispatch_RSQk[4:0]), .inst_in(instrOUT[31:0]),
+      .issued_to_in(dispatch_writeRegROBEntry[4:0]), .cdb_in(cdb_dout[36:0]),
+      .branch_result(targetAddr[31:0]), .full(branchFull), .req_bus(XLXN_828),
+      .rs(XLXN_1129[31:0]), .rt(XLXN_1130[31:0]), .inst_out(XLXN_1127[31:0]),
+      .cdb_out(XLXN_876[100:0]), .addr_in(addrOUT[31:0]),
+      .addr_out(XLXN_1128[31:0]), .orangina(orangina[31:0]),
+      .can_opener(can_opener), .airplane(airplane));
+branchPredictor my_branchPredictor (.branchResult(airplane),
+      .update(can_opener), .clk(CLK), .rst(RST), .branchPC(pc_addrOUT[31:0]),
+      .updatePC(orangina[31:0]), .notTakenPC(addr_notTaken[31:0]),
+      .takenPC(addr_taken[31:0]), .predictedPC(XLXN_633[31:0]),
+      .inst(Corona[31:0]));
+branchUnit ID_branchUnit (.inst(instrOUT[31:0]), .addr(addrOUT[31:0]),
+      .rs(dispatch_RSVj[31:0]), .rt(dispatch_RSVk[31:0]),
+      .Qj(dispatch_RSQj[4:0]), .Qk(dispatch_RSQk[4:0]),
+      .targetAddr(BU_targetAddr[31:0]));
+branchUnit RS_branchUnit (.inst(XLXN_1127[31:0]), .addr(XLXN_1128[31:0]),
+      .rs(XLXN_1129[31:0]), .rt(XLXN_1130[31:0]), .Qj(zeroes[4:0]),
+      .Qk(zeroes[4:0]), .targetAddr(targetAddr[31:0]));
+cache instr_cache (.clk(CLK), .rst(RST), .we_mem(XLXN_1679),
+      .din(zeroes[31:0]), .mem_req(XLXN_1931), .dout(XLXN_1375[31:0]),
+      .en(VCC), .write_if_cached(GND), .word_addr_read(instr_addr[24:2]),
+      .word_addr_write(zeroes[22:0]), .line_in(cache_line[255:0]),
+      .tag_index_mem(inst_mem_addr[22:0]));
+cache data_cache (.clk(CLK), .rst(RST), .we_mem(XLXN_1594),
+      .din(rob_valueOUT[31:0]), .mem_req(XLXN_1710), .dout(XLXN_239[31:0]),
+      .en(VCC), .write_if_cached(commit_write_cache),
+      .word_addr_read(load_buffer_loadAddrBus[22:0]),
+      .word_addr_write(rob_destOUT[22:0]), .line_in(cache_line[255:0]),
+      .tag_index_mem(data_mem_addr[22:0]));
+cdb my_cdb (.mult_req(XLXN_1944), .load_req(XLXN_1419), .alu_req(XLXN_73),
+      .clk(CLK), .rst(RST), .mult_din(XLXN_1945[132:0]),
+      .load_din(XLXN_1720[68:0]), .alu_din(XLXN_74[100:0]),
+      .mult_granted(XLXN_1946), .load_granted(XLXN_161), .alu_granted(XLXN_75),
+      .dout_en(cdb_dout_en), .dout(cdb_dout[132:0]),
+      .store_req(store_buffer_req_bus), .store_din(XLXN_1729[68:0]),
+      .store_granted(XLXN_1727), .branch_din(XLXN_876[100:0]),
+      .branch_granted(XLXN_830), .branch_req(XLXN_828));
+commit my_commit (.clk(CLK), .rst(RST), .robHeadEntryReady(robReady),
+      .write_mem_req_granted(arbiter_WB_granted), .memio_bit(rob_memio_bit),
+      .rls(rls), .robHeadEntry(rob_commitPtr[4:0]),
+      .robHeadEntryDest(rob_destOUT[4:0]), .robHeadEntryInstr(dm_instr[31:0]),
+      .robHeadEntryValue(rob_valueOUT[31:0]), .writeRegROBEntry(dReorder[4:0]),
+      .predictedAddr(rob_readPredAddr[31:0]), .regFileCommit(regFileCommit),
+      .regStatCommit(regStatCommit), .robCommit(commit_robCommit),
+      .rollBack(commit_rollBack), .write_cache(commit_write_cache),
+      .write_mem_req(commit_write_mem_req), .memio_we(commit_memio_we),
+      .stat_output(stat_output[7:0]),
+      .robPostBranchDelayEntryValid(rob_PostBranchDelayEntryValid),
+      .stall(XLXN_2028), .stall_rollback(commit_stall_rollback));
+counter64 my_counter64 (.CLK(CLK), .ENABLE(VCC), .RESET(RST),
+      .COUNT(cycle_count[63:0]));
+dispatch my_dispatch (.stall(inst_req_or), .robFull(robFull),
+      .brnchFull(branchFull), .aluFull(aluFull), .mulDivFull(mult_full),
+      .lwFull(lwFull), .swFull(swFull), .rsHReady(rsHReady),
+      .rtHReady(rtHReady), .addr(addrOUT[31:0]), .instr(instrOUT[31:0]),
+      .rsReorder(regStatus_rsReorder[4:0]),
+      .rtReorder(regStatus_rtReorder[4:0]), .rsData(regfile_rsData[31:0]),
+      .rtData(regfile_rtData[31:0]), .rsHValue(rob_readValueOUT1[31:0]),
+      .rtHValue(rob_readValueOUT2[31:0]), .ROBEntryAlloc(rob_issuePtr[4:0]),
+      .robIssue(dispatch_robIssue), .regStatIssue(dispatch_regStatIssue),
+      .brnchIssue(dispatch_branchIssue), .aluIssue(dispatch_aluIssue),
+      .mulDivIssue(dispatch_multIssue), .lwIssue(dispatch_lwIssue),
+      .swIssue(dispatch_swIssue), .RSBusy(dispatch_RSBusy),
+      .rs(dispatch_rs[5:0]), .rt(dispatch_rt[4:0]), .rd(dispatch_rd[4:0]),
+      .writeReg(dispatch_writeReg[5:0]),
+      .writeRegROBEntry(dispatch_writeRegROBEntry[4:0]),
+      .RSVj(dispatch_RSVj[31:0]), .RSVk(dispatch_RSVk[31:0]),
+      .RSQj(dispatch_RSQj[4:0]), .RSQk(dispatch_RSQk[4:0]),
+      .RSAddrImm(dispatch_RSAddrImm[15:0]), .rsH(dispatch_rsH[4:0]),
+      .rtH(dispatch_rtH[4:0]), .aluOp(dispatch_aluOp[5:0]),
+      .cdb_en(cdb_dout_en), .cdb_in(cdb_dout[68:0]),
+      .ROBEntryReady(dispatch_ROBEntryReady),
+      .branchOp(dispatch_branchOp[1:0]), .mulDivOp(dispatch_MultDivOp[2:0]),
+      .jrStall(dispatch_jrStall), .clk(CLK), .rst(RST),
+      .rollback(commit_rollBack));
+dmdb_commit my_dmdb_commit (.commit(commit_robCommit),
+      .addr(rob_addrOUT[31:0]), .value(rob_valueOUT[31:0]),
+      .cycle_count(cycle_count[63:0]), .cdb_en(cdb_dout_en),
+      .issue(dispatch_robIssue), .cdb_in_VjVk(cdb_dout[132:69]),
+      .cdb_in_tag(cdb_dout[36:32]), .commit_ptr(rob_commitPtr[4:0]),
+      .issue_ptr(rob_issuePtr[4:0]), .rsValIN(dispatch_RSVj[31:0]),
+      .rtValIN(dispatch_RSVk[31:0]), .instrIN(instrOUT[31:0]), .clk(CLK),
+      .commit_addr(dm_addr[31:0]), .commit_instr(dm_instr[31:0]), .rst(RST),
+      .rollback(commit_rollBack));
+dmdb_dispatch my_dmdb_dispatch (.clk(CLK), .issue(dispatch_robIssue),
+      .instr(instrOUT[31:0]), .addr(addrOUT[31:0]),
+      .cycle_count(cycle_count[63:0]));
+four XLXI_28 (.four(XLXN_13[31:0]));
+GND XLXI_78 (.G(GND));
+iReg XLXI_2 (.clk(CLK), .rst(RST), .we(XLXN_1956), .instrIN(Corona[31:0]),
+      .addrIN(pc_addrOUT[31:0]), .instrOUT(instrOUT[31:0]),
+      .addrOUT(addrOUT[31:0]));
+load_buffer my_load_buffer (.issue(dispatch_lwIssue), .data_mem_req(data_req),
+      .immed_in(dispatch_RSAddrImm[15:0]), .Vj_in(dispatch_RSVj[31:0]),
+      .Qj_in(dispatch_RSQj[4:0]),
+      .issued_to_in(dispatch_writeRegROBEntry[4:0]), .data(XLXN_1925[31:0]),
+      .full(lwFull), .bus_granted(XLXN_161), .req_bus(XLXN_1419),
+      .cdb_out(XLXN_1720[68:0]), .clk(CLK), .rst(RST), .flush(commit_rollBack),
+      .cdb_en(cdb_dout_en), .cdb_in(cdb_dout[36:0]),
+      .curr_ptr(load_buffer_loadCurrPtr[2:0]),
+      .rob_readyToExe(rob_loadReadyToExe[6:1]),
+      .loadAddrBus(load_buffer_loadAddrBus[28:0]),
+      .issued_to1(load_buffer_loadEntry1[4:0]),
+      .issued_to2(load_buffer_loadEntry2[4:0]),
+      .issued_to3(load_buffer_loadEntry3[4:0]),
+      .issued_to4(load_buffer_loadEntry4[4:0]),
+      .issued_to5(load_buffer_loadEntry5[4:0]),
+      .issued_to6(load_buffer_loadEntry6[4:0]),
+      .rob_loadDataValid(rob_loadDataValid),
+      .rob_commitPtr(rob_commitPtr[4:0]), .write_if_cached(commit_write_cache),
+      .write_addr(rob_destOUT[22:0]), .loadIsCC(load_buffer_loadIsCC[6:1]));
+m32x2 XLXI_311 (.in0(mux_nextPC[31:0]), .in1(XLXN_1991[31:0]), .sel(RST),
+      .out0(XLXN_2014[31:0]));
+m32x2 XLXI_316 (.in0(pc_addrOUT[31:0]), .in1(XLXN_2014[31:0]), .sel(IF_enable),
+      .out0(instr_addr[31:0]));
+m32x2 XLXI_161 (.in0(regfile_rsData_pre[31:0]), .in1(reg_HI_LO[31:0]),
+      .sel(dispatch_rs[5]), .out0(regfile_rsData[31:0]));
+m32x2 XLXI_254 (.in0(XLXN_239[31:0]), .in1(memio_dout[31:0]),
+      .sel(load_buffer_loadAddrBus[23]), .out0(XLXN_1926[31:0]));
+m32x2 XLXI_324 (.in0(XLXN_2034[31:0]), .in1(rob_valueOUT_reg[31:0]),
+      .sel(commit_stall_rollback), .out0(mux_nextPC[31:0]));
+m32x2 XLXI_270 (.in0(XLXN_1926[31:0]), .in1(rob_loadData[31:0]),
+      .sel(rob_loadDataValid), .out0(XLXN_1925[31:0]));
+m32x2 XLXI_120 (.in0(XLXN_1375[31:0]), .in1(XLXN_1388[31:0]),
+      .sel(rom_addr[31]), .out0(Corona[31:0]));
+m32x4 pc_mux (.in0(adder_pc4[31:0]), .in1(XLXN_633[31:0]),
+      .in2(BU_targetAddr[31:0]), .in3(rob_valueOUT[31:0]), .sel(pcMuxSel[1:0]),
+      .out0(XLXN_2034[31:0]));
+memio my_memio (.rst(RST), .clk(CLK), .we(commit_memio_we),
+      .out_sel(memio_outsel), .writeAddr(rob_destOUT[22:0]),
+      .din(rob_valueOUT[31:0]), .in_bus(memio_in[7:0]),
+      .dout(memio_dout[31:0]), .out_bus(memio_out[31:0]), .en(VCC),
+      .MEM_addr(rob_destOUT[22:0]), .readAddr(load_buffer_loadAddrBus[22:0]));
+memory_control my_memory_control (.RESET(mem_ctrl_rst), .PROCCLK(CLK),
+      .request(mem_request), .r_w(mem_r_w), .DRAMCLK(DRAMCLK),
+      .address(mem_addr[22:0]), .data_in(mem_data[31:0]),
+      .waitForMem(waitForMem), .CKE(CKE), .CS(CS), .RAS(RAS), .CAS(CAS),
+      .WE(WE), .burstReadDone_reg(burstReadDone),
+      .readBuffer_WE(readBuffer_WE), .data_out(), .Addr(addr[11:0]),
+      .Ba(Ba[1:0]), .DQM(DQM[1:0]), .Data(mem_BiData[31:0]));
+mult_res_stations XLXI_282 (.issue(dispatch_multIssue), .cdb_en(cdb_dout_en),
+      .mult_busy(XLXN_1948), .clk(CLK), .rst(RST), .flush(commit_rollBack),
+      .bus_granted(XLXN_1946), .Vj_in(dispatch_RSVj[31:0]),
+      .Vk_in(dispatch_RSVk[31:0]), .Qj_in(dispatch_RSQj[4:0]),
+      .Qk_in(dispatch_RSQk[4:0]), .mult_type_in(dispatch_MultDivOp[2:0]),
+      .issued_to_in(dispatch_writeRegROBEntry[4:0]), .cdb_in(cdb_dout[68:0]),
+      .HI(XLXN_1953[31:0]), .LO(XLXN_1954[31:0]), .full(mult_full),
+      .mult_op(XLXN_1947), .mult_signed_op(XLXN_1949), .mult_reset(XLXN_1950),
+      .req_bus(XLXN_1944), .mult_inA(XLXN_1951[31:0]),
+      .mult_inB(XLXN_1952[31:0]), .cdb_out(XLXN_1945[132:0]),
+      .rob_commitPtr(rob_commitPtr[4:0]), .kickout(mult_kickout[5:0]));
+multdivid_datapath XLXI_283 (.multiplicand_divider_in(XLXN_1951[31:0]),
+      .multiplier_dividen_in(XLXN_1952[31:0]), .op_in(XLXN_1947),
+      .signedOp_in(XLXN_1949), .clk(CLK), .rst(XLXN_1950), .busy(XLXN_1948),
+      .hi_out(XLXN_1953[31:0]), .lo_out(XLXN_1954[31:0]));
+NOR2 XLXI_279 (.I0(dispatch_jrStall), .I1(dispatch_RSBusy), .O());
+NOR3 XLXI_303 (.I0(dispatch_RSBusy), .I1(dispatch_jrStall), .I2(inst_req_or),
+      .O(XLXN_1956));
+NOR3 XLXI_302 (.I0(dispatch_RSBusy), .I1(dispatch_jrStall), .I2(inst_req_or),
+      .O(IF_enable));
+OR2 XLXI_323 (.I0(inst_req_or), .I1(dispatch_jrStall), .O(XLXN_2028));
+OR3 XLXI_321 (.I0(inst_req), .I1(inst_req_reg), .I2(rich), .O(inst_req_or));
+pc XLXI_1 (.WE(IF_enable), .CLK(CLK), .RST(RST), .addrIN(mux_nextPC[31:0]),
+      .addrOUT(pc_addrOUT[31:0]));
+pcSelect my_pcSelect (.branchIssue(dispatch_branchIssue),
+      .Qj(dispatch_RSQj[4:0]), .Qk(dispatch_RSQk[4:0]), .sel(pcMuxSel[1:0]),
+      .rollback(commit_rollBack), .branchOp(dispatch_branchOp[1:0]), .rst(RST),
+      .clk(CLK));
+readBuffer my_readBuffer (.RESET(RST), .WE(readBuffer_WE), .DRAMCLK(DRAMCLK),
+      .dIn(mem_BiData[31:0]), .dOut(cache_line[255:0]));
+reg32 XLXI_309 (.clk(CLK), .rst(GND), .writeEnable(VCC),
+      .in0(instr_addr[31:0]), .out0(rom_addr[31:0]));
+reg_HI_LO my_HI_LO (.ReadRegister(instrOUT[1]), .WriteData(rob_valueOUT[63:0]),
+      .ReadData(reg_HI_LO[31:0]), .clk(CLK), .RegWrite(regFileCommit),
+      .rst(RST), .writeReg(rob_destOUT[5]));
+reg_status my_reg_status (.issue(dispatch_regStatIssue),
+      .result_wr(regStatCommit), .dest_reg_no(dispatch_writeReg[5:0]),
+      .issued_to(dispatch_writeRegROBEntry[4:0]),
+      .result_wr_reg_no(rob_destOUT[5:0]), .j_reg_no(dispatch_rs[5:0]),
+      .k_reg_no(dispatch_rt[4:0]), .j_status(regStatus_rsReorder[4:0]),
+      .k_status(regStatus_rtReorder[4:0]), .clk(CLK), .rst(RST),
+      .result_wr_status(dReorder[4:0]), .flush(commit_rollBack));
+regfile my_regfile (.RegWrite(regFileCommit), .rst(RST),
+      .ReadRegister1(dispatch_rs[4:0]), .ReadRegister2(dispatch_rt[4:0]),
+      .WriteRegister(rob_destOUT[4:0]), .WriteData(rob_valueOUT[31:0]),
+      .ReadData1(regfile_rsData_pre[31:0]), .ReadData2(regfile_rtData[31:0]),
+      .clk(CLK));
+register XLXI_319 (.CLK(CLK), .WE(VCC), .DIN(inst_req), .DOUT(XLXN_2027),
+      .RST(RST));
+register XLXI_320 (.CLK(CLK), .WE(VCC), .DIN(XLXN_2027), .DOUT(rich),
+      .RST(RST));
+register XLXI_304 (.CLK(CLK), .WE(VCC), .DIN(inst_req), .DOUT(inst_req_reg),
+      .RST(RST));
+rob my_rob (.swIN(dispatch_swIssue), .CDB_en(cdb_dout_en),
+      .storeAddrBus_en(store_buffer_req_bus), .isSpecBranchIN(GND),
+      .rollback(commit_rollBack), .issue(dispatch_robIssue),
+      .commit(commit_robCommit), .destIN(dispatch_writeReg[5:0]),
+      .CDBIN(cdb_dout[68:0]), .storeAddrBus(store_buffer_addr_out[28:0]),
+      .readyOUT(robReady), .swOUT(),
+      .postBranchDelayEntryValid(rob_PostBranchDelayEntryValid),
+      .loadDataValid(rob_loadDataValid), .ROBFull(robFull), .isSpecBranchOUT(),
+      .destOUT(rob_destOUT[22:0]), .valueOUT(rob_valueOUT[63:0]),
+      .loadData(rob_loadData[31:0]), .issue_ptr(rob_issuePtr[4:0]), .clk(CLK),
+      .rst(RST), .commit_ptr(rob_commitPtr[4:0]),
+      .readValueOUT1(rob_readValueOUT1[31:0]),
+      .readEntryNo1(dispatch_rsH[4:0]), .addrIN(addrOUT[31:0]),
+      .addrOUT(rob_addrOUT[31:0]), .readReadyOUT1(rsHReady),
+      .readValueOUT2(rob_readValueOUT2[31:0]),
+      .readEntryNo2(dispatch_rtH[4:0]), .readReadyOUT2(rtHReady),
+      .readyIN(dispatch_ROBEntryReady), .readPredAddr(rob_readPredAddr[31:0]),
+      .memio_bit(rob_memio_bit), .readEntryNo1_HIorLO(dispatch_rs[5]),
+      .loadReadyToExe(rob_loadReadyToExe[6:1]),
+      .loadAddrBus(load_buffer_loadAddrBus[28:0]),
+      .loadEntry1(load_buffer_loadEntry1[4:0]),
+      .loadEntry2(load_buffer_loadEntry2[4:0]),
+      .loadEntry3(load_buffer_loadEntry3[4:0]),
+      .loadEntry4(load_buffer_loadEntry4[4:0]),
+      .loadEntry5(load_buffer_loadEntry5[4:0]),
+      .loadEntry6(load_buffer_loadEntry6[4:0]),
+      .loadCurrPtr(load_buffer_loadCurrPtr[2:0]),
+      .mult_kickOut(mult_kickout[5:0]), .valueOUT_reg(rob_valueOUT_reg[31:0]),
+      .loadIsCC(load_buffer_loadIsCC[6:1]));
+rom XLXI_293 (.addr(rom_addr[6:2]), .instr(XLXN_1388[31:0]));
+start_addr XLXI_310 (.startAddr(XLXN_1991[31:0]));
+store_buffer XLXI_233 (.issue(dispatch_swIssue),
+      .immed_in(dispatch_RSAddrImm[15:0]), .Vj_in(dispatch_RSVj[31:0]),
+      .Qj_in(dispatch_RSQj[4:0]), .Vstore_in(dispatch_RSVk[31:0]),
+      .Qstore_in(dispatch_RSQk[4:0]),
+      .issued_to_in(dispatch_writeRegROBEntry[4:0]), .full(swFull),
+      .addr_out(store_buffer_addr_out[28:0]), .clk(CLK), .rst(RST),
+      .flush(commit_rollBack), .bus_granted(XLXN_1727),
+      .req_bus(store_buffer_req_bus), .cdb_out(XLXN_1729[68:0]),
+      .cdb_en(cdb_dout_en), .cdb_in(cdb_dout[36:0]),
+      .rob_commitPtr(rob_commitPtr[4:0]));
+VCC XLXI_80 (.P(VCC));
+zero256 XLXI_134 (.z(zeroes[255:0]));
+endmodule
+

@@ -1,0 +1,47 @@
+// Verilog model created from schematic cpu_memory.sch - Fri Nov 28 05:15:05 2003
+
+
+`timescale 1ns / 1ps
+
+module cpu_memory(DRAMCLK, clk, memio_in, memio_outsel, rls, rst, dm_addr,
+      dm_inst, memio_out, stat_output);
+
+ input DRAMCLK;
+ input clk;
+ input [7:0] memio_in;
+ input memio_outsel;
+ input rls;
+ input rst;
+output [31:0] dm_addr;
+output [31:0] dm_inst;
+output [31:0] memio_out;
+output [7:0] stat_output;
+
+wire [1:0] Ba;
+wire CAS;
+wire CKE;
+wire CS;
+wire [1:0] DQM;
+wire [31:0] Data;
+wire RAS;
+wire WE;
+wire [11:0] addr;
+wire proc_rst;
+wire procclk;
+
+delay_proc_rst my_delay_proc_rst (.rst(rst), .DRAMCLK(DRAMCLK),
+      .PROCCLK_IN(clk), .PROCCLK_OUT(procclk), .proc_rst(proc_rst));
+mt48lc8m16a2 my_mem0 (.Clk(DRAMCLK), .Cke(CKE), .Cs_n(CS), .Ras_n(RAS),
+      .Cas_n(CAS), .We_n(WE), .Addr(addr[11:0]), .Ba(Ba[1:0]), .Dqm(DQM[1:0]),
+      .Dq(Data[31:16]));
+mt48lc8m16a2 my_mem1 (.Clk(DRAMCLK), .Cke(CKE), .Cs_n(CS), .Ras_n(RAS),
+      .Cas_n(CAS), .We_n(WE), .Addr(addr[11:0]), .Ba(Ba[1:0]), .Dqm(DQM[1:0]),
+      .Dq(Data[15:0]));
+processor my_cpu (.CLK(procclk), .RST(proc_rst), .rls(rls),
+      .memio_in(memio_in[7:0]), .memio_outsel(memio_outsel), .DRAMCLK(DRAMCLK),
+      .mem_ctrl_rst(rst), .mem_BiData(Data[31:0]), .dm_addr(dm_addr[31:0]),
+      .memio_out(memio_out[31:0]), .stat_output(stat_output[7:0]), .WE(WE),
+      .addr(addr[11:0]), .CAS(CAS), .RAS(RAS), .CS(CS), .CKE(CKE),
+      .Ba(Ba[1:0]), .DQM(DQM[1:0]), .dm_instr(dm_inst[31:0]));
+endmodule
+
